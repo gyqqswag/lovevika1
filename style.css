@@ -1,0 +1,123 @@
+:root{
+  --violet:#b66bff;
+  --violet-deep:#7b2ff7;
+  --ink:#0b0618;
+  --pixel:'Press Start 2P','Courier New',monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--ink);font-family:var(--pixel);-webkit-tap-highlight-color:transparent}
+#stage{position:fixed;inset:0;overflow:hidden}
+
+/* ---------- фон ---------- */
+#sky-dark,#sky-pink{position:absolute;inset:0}
+#sky-dark{background:radial-gradient(ellipse at 50% 40%,#2c0f52 0%,#140826 55%,var(--ink) 100%)}
+#sky-pink{background:linear-gradient(180deg,#ffb9d3 0%,#ffd8e6 60%,#ffe8d8 100%);opacity:0;transition:opacity 4.5s ease-in-out}
+.pink #sky-pink{opacity:1}
+.pink #sky-dark{opacity:0;transition:opacity 4.5s ease-in-out}
+#stars{position:absolute;inset:0;transition:opacity 3s;pointer-events:none}
+.pink #stars{opacity:0}
+.star{position:absolute;width:3px;height:3px;border-radius:50%;background:#e5c8ff;box-shadow:0 0 8px #c58bff;animation:twinkle 3s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:1;transform:scale(1.3)}}
+
+/* ---------- мир ---------- */
+#world{position:absolute;inset:0;width:100%;height:100%;opacity:0;transform-origin:50% 82%;
+  transition:opacity 1.6s ease-in-out,transform 12s cubic-bezier(.45,0,.25,1);will-change:transform,opacity}
+#world.show{opacity:1}
+#world.zoom{transform:scale(1.55)}
+#world.zoomfar{transform:scale(1.04);transition:transform 9s cubic-bezier(.45,0,.25,1),opacity 1.6s}
+#sun{animation:moon 9s ease-in-out infinite alternate}
+@keyframes moon{to{transform:translateY(-14px)}}
+.wst{animation:twinkle 3s ease-in-out infinite}
+.cloud{animation:drift 60s linear infinite alternate}
+.c2{animation-duration:80s}.c3{animation-duration:70s;animation-direction:alternate-reverse}
+@keyframes drift{from{transform:translateX(-60px)}to{transform:translateX(80px)}}
+.win{animation:glow 4s ease-in-out infinite}
+@keyframes glow{0%,100%{opacity:.7}50%{opacity:1}}
+
+/* ---------- персонажи ---------- */
+#boy,#girl{transition:transform 3.2s cubic-bezier(.45,0,.25,1)}
+#boy{transform:translateX(-55px)}
+#girl{transform:translateX(55px)}
+.approach #boy{transform:translateX(-29px)}
+.approach #girl{transform:translateX(29px)}
+.head{transform-box:fill-box;transform-origin:50% 100%;transition:transform 1.6s ease-in-out}
+.face{transition:transform 1.4s ease-in-out}
+#bHead .face{transform:translateX(-1px)} #gHead .face{transform:translateX(1px)}
+.turn #bHead{transform:rotate(5deg)}.turn #gHead{transform:rotate(-5deg)}
+.turn #bHead .face{transform:translateX(3px)}.turn #gHead .face{transform:translateX(-3px)}
+.kiss #bHead{transform:translate(5px,1px) rotate(10deg)}
+.kiss #gHead{transform:translate(-5px,1px) rotate(-10deg)}
+.ec{opacity:0;transition:opacity .4s}
+.kiss .ec{opacity:1}.kiss .eo{opacity:0}
+.eo{transition:opacity .4s}
+.kiss .mouth{opacity:0}
+.cheer #chars{animation:bob 3.5s ease-in-out infinite}
+@keyframes bob{50%{transform:translate(800px,754px) scale(1.7)}}
+
+/* ---------- карточка ---------- */
+.card{position:fixed;inset:0;margin:auto;width:min(86vw,400px);height:fit-content;z-index:10;
+  padding:56px 24px 48px;text-align:center;border-radius:26px;
+  background:linear-gradient(145deg,rgba(60,24,110,.55),rgba(24,10,50,.7));
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:2px solid var(--violet);
+  box-shadow:0 0 28px rgba(160,80,255,.55),0 0 80px rgba(130,50,240,.3),inset 0 0 36px rgba(170,100,255,.25);
+  animation:float 4.5s ease-in-out infinite,appear 1.6s ease-out both}
+@keyframes appear{from{opacity:0}to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(-8px) rotate(-.6deg)}50%{transform:translateY(8px) rotate(.6deg)}}
+.card h1{margin:0 0 44px;font-size:clamp(15px,4.6vw,21px);line-height:1.8;color:#f6eaff;font-weight:400;text-shadow:0 0 14px #b66bff,0 0 30px #8a3ffc}
+#openBtn{font:inherit;font-size:clamp(11px,3.4vw,14px);color:#fff;border:0;cursor:pointer;padding:18px 34px;border-radius:16px;
+  background:linear-gradient(135deg,#a24bff,#6a22e8);box-shadow:0 0 18px #9b4cff,0 6px 0 #4a14a8;
+  transition:transform .35s,box-shadow .35s,filter .35s,opacity .8s}
+#openBtn:hover,#openBtn:focus-visible{transform:scale(1.1);filter:brightness(1.25);box-shadow:0 0 34px #c48bff,0 0 60px #9b4cff,0 6px 0 #4a14a8;outline:none}
+#openBtn:active{transform:scale(1.02) translateY(3px)}
+.card.glow{animation:float 4.5s ease-in-out infinite,flare 1.4s ease-in forwards}
+@keyframes flare{to{box-shadow:0 0 60px #e0b0ff,0 0 140px #b66bff,inset 0 0 60px rgba(230,190,255,.7);border-color:#fff}}
+.card.glow #openBtn{opacity:0;transform:scale(.7);pointer-events:none}
+.card.half{animation:none;pointer-events:none}
+.card.half h1{text-shadow:0 0 14px #b66bff}
+.card.half.l{clip-path:polygon(0 0,52% 0,44% 12%,56% 24%,46% 38%,56% 52%,46% 66%,55% 80%,48% 100%,0 100%);
+  animation:splitL 2.2s cubic-bezier(.5,0,.8,.4) forwards}
+.card.half.r{clip-path:polygon(52% 0,100% 0,100% 100%,48% 100%,55% 80%,46% 66%,56% 52%,46% 38%,56% 24%,44% 12%);
+  animation:splitR 2.2s cubic-bezier(.5,0,.8,.4) forwards}
+@keyframes splitL{0%{transform:none;opacity:1}15%{transform:translate(-4%,0) rotate(-1deg)}100%{transform:translate(-90vw,30vh) rotate(-38deg);opacity:0}}
+@keyframes splitR{0%{transform:none;opacity:1}15%{transform:translate(4%,0) rotate(1deg)}100%{transform:translate(90vw,-30vh) rotate(38deg);opacity:0}}
+.card.hidden{visibility:hidden}
+
+/* ---------- большое сердце ---------- */
+#bigheart{position:fixed;left:50%;top:50%;width:min(52vmin,340px);margin:calc(min(52vmin,340px)/-2) 0 0 calc(min(52vmin,340px)/-2);
+  z-index:9;opacity:0;transform:scale(0);filter:drop-shadow(0 0 22px #ff7fb0) drop-shadow(0 0 60px #ff9ac1);pointer-events:none}
+#bigheart.pop{animation:pop 1.8s cubic-bezier(.2,1.4,.4,1) forwards,beat 1.6s 1.8s ease-in-out infinite}
+#bigheart.leave{animation:leave 3s ease-in forwards}
+@keyframes pop{0%{opacity:0;transform:scale(0) rotate(-12deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes beat{0%,100%{opacity:1;transform:scale(1)}50%{opacity:1;transform:scale(1.09)}}
+@keyframes leave{from{opacity:1;transform:scale(1) translateY(0)}to{opacity:0;transform:scale(.5) translateY(-34vh)}}
+
+/* ---------- сердечки ---------- */
+#hearts,#bokeh{position:fixed;inset:0;pointer-events:none;z-index:8;overflow:hidden}
+.heart{position:absolute;left:0;top:0;font-family:Arial,sans-serif;line-height:1;color:#ff6fa5;will-change:transform,opacity;
+  text-shadow:0 0 10px rgba(255,120,170,.8);opacity:0}
+.heart.fall{animation:fall var(--dur) linear forwards}
+.heart.up{animation:up var(--dur) ease-out forwards}
+.heart.burst{animation:burst var(--dur) cubic-bezier(.1,.7,.3,1) forwards}
+@keyframes fall{0%{transform:translate3d(0,-8vh,0) rotate(0);opacity:0}8%{opacity:var(--o)}92%{opacity:var(--o)}100%{transform:translate3d(var(--dx),108vh,0) rotate(var(--rot));opacity:0}}
+@keyframes up{0%{transform:translate3d(0,0,0) scale(.4) rotate(0);opacity:0}15%{opacity:1}100%{transform:translate3d(var(--dx),var(--dy),0) scale(1.15) rotate(var(--rot));opacity:0}}
+@keyframes burst{0%{transform:translate3d(0,0,0) scale(.3);opacity:1}100%{transform:translate3d(var(--dx),var(--dy),0) scale(1);opacity:0}}
+.bk{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.75),rgba(255,200,225,0) 70%);
+  mix-blend-mode:screen;opacity:0;animation:bk 9s ease-in-out infinite}
+@keyframes bk{0%,100%{opacity:0;transform:translateY(0) scale(.8)}50%{opacity:.8;transform:translateY(-30px) scale(1.1)}}
+
+/* ---------- подпись и кнопки ---------- */
+#caption{position:fixed;left:0;right:0;bottom:calc(9vh + env(safe-area-inset-bottom));margin:0 auto;width:90%;text-align:center;z-index:11;
+  font-size:clamp(11px,3.4vw,18px);line-height:1.8;color:#fff;opacity:0;transition:opacity 3s;
+  text-shadow:0 2px 0 #c2467a,0 0 18px #ff6fa5}
+#caption.on{opacity:1}
+#replay,#sound{position:fixed;z-index:12;font:inherit;font-size:11px;color:#fff;border:0;cursor:pointer;border-radius:12px;
+  background:linear-gradient(135deg,#ff6fa5,#c94bd6);box-shadow:0 4px 0 #8f2d9c;opacity:0;pointer-events:none;transition:opacity 1.5s,transform .3s}
+#replay{left:50%;bottom:calc(3vh + env(safe-area-inset-bottom));padding:14px 20px;transform:translateX(-50%)}
+#replay.on,#sound.on{opacity:1;pointer-events:auto}
+#replay:hover{transform:translateX(-50%) scale(1.08)}
+#sound{top:calc(14px + env(safe-area-inset-top));right:14px;padding:10px 12px}
+#sound.off{filter:grayscale(.8) brightness(.9)}
+#sound.off::after{content:" ✕"}
+
+@media (prefers-reduced-motion:reduce){.heart.fall{animation-duration:14s}.cloud,.win,.bk{animation:none}}

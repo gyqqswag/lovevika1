@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Подарок викусену</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <div id="sky-dark"></div>
+  <div id="sky-pink"></div>
+  <div id="stars"></div>
+
+  <!-- МИР: закат, город, холм, персонажи -->
+  <svg id="world" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#070b2a"/>
+        <stop offset=".45" stop-color="#1b1659"/>
+        <stop offset=".78" stop-color="#4a2a7a"/>
+        <stop offset="1" stop-color="#8a4a8f"/>
+      </linearGradient>
+      <radialGradient id="gSun">
+        <stop offset="0" stop-color="#e8eaff" stop-opacity=".9"/>
+        <stop offset=".3" stop-color="#b9a8ff" stop-opacity=".35"/>
+        <stop offset="1" stop-color="#7a6af0" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="gHill" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2f7a5a"/>
+        <stop offset="1" stop-color="#14402f"/>
+      </linearGradient>
+      <linearGradient id="gFar" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#3a2f7a"/>
+        <stop offset="1" stop-color="#5b3a8c"/>
+      </linearGradient>
+      <linearGradient id="gNear" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#1a1545"/>
+        <stop offset="1" stop-color="#2f1d5c"/>
+      </linearGradient>
+    </defs>
+
+    <rect width="1600" height="900" fill="url(#gSky)"/>
+    <g id="wstars"></g>
+    <g id="sun">
+      <circle cx="800" cy="360" r="260" fill="url(#gSun)"/>
+      <circle cx="800" cy="360" r="70" fill="#f4f1ff"/>
+      <circle cx="780" cy="345" r="11" fill="#dcd8f5"/><circle cx="825" cy="378" r="8" fill="#dcd8f5"/><circle cx="812" cy="332" r="5" fill="#dcd8f5"/>
+    </g>
+    <g id="clouds" fill="#4a3d8f" opacity=".55">
+      <g class="cloud c1"><ellipse cx="260" cy="250" rx="120" ry="26"/><ellipse cx="320" cy="232" rx="70" ry="26"/></g>
+      <g class="cloud c2"><ellipse cx="1180" cy="190" rx="150" ry="28"/><ellipse cx="1120" cy="172" rx="76" ry="26"/></g>
+      <g class="cloud c3"><ellipse cx="760" cy="340" rx="110" ry="20"/><ellipse cx="820" cy="326" rx="60" ry="20"/></g>
+    </g>
+    <g id="far"></g>
+    <g id="near"></g>
+    <path d="M0 900 L0 820 Q800 690 1600 820 L1600 900Z" fill="url(#gHill)"/>
+    <ellipse cx="800" cy="760" rx="170" ry="14" fill="#0b2a20" opacity=".5"/>
+
+    <g id="chars" transform="translate(800 758) scale(1.7)">
+      <circle id="anchor" cx="0" cy="-165" r="1" fill="none"/>
+
+      <!-- МАЛЬЧИК: выше, белые волосы, чёрная толстовка -->
+      <g id="boy">
+        <rect x="-15" y="-38" width="12" height="38" rx="4" fill="#2b2b3d"/>
+        <rect x="3" y="-38" width="12" height="38" rx="4" fill="#2b2b3d"/>
+        <ellipse cx="-10" cy="-1" rx="11" ry="5" fill="#f7f7fb"/>
+        <ellipse cx="10" cy="-1" rx="11" ry="5" fill="#f7f7fb"/>
+        <rect x="-35" y="-98" width="13" height="48" rx="6.5" fill="#1a1a22"/>
+        <rect x="22" y="-98" width="13" height="48" rx="6.5" fill="#1a1a22"/>
+        <circle cx="-28.5" cy="-48" r="6" fill="#ffe0cc"/>
+        <circle cx="28.5" cy="-48" r="6" fill="#ffe0cc"/>
+        <rect x="-25" y="-104" width="50" height="72" rx="15" fill="#1a1a22"/>
+        <path d="M-15 -52 h30 l-4 15 h-22z" fill="#262631"/>
+        <path d="M-6 -98 v20 M6 -98 v20" stroke="#f3f3f8" stroke-width="2" stroke-linecap="round"/>
+        <ellipse cx="0" cy="-102" rx="31" ry="11" fill="#1a1a22"/>
+        <g class="head" id="bHead">
+          <circle cx="0" cy="-130" r="27" fill="#ffe0cc"/>
+          <path d="M-29 -132 C-34 -166 34 -166 29 -132 C23 -148 9 -152 0 -147 C-9 -152 -23 -148 -29 -132Z" fill="#f6f8ff" stroke="#d6d9ee" stroke-width="1.5"/>
+          <path d="M-8 -150 l4 12 l5 -11 M10 -149 l-2 10" stroke="#d6d9ee" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <g class="face">
+            <g class="eo"><ellipse cx="-9" cy="-128" rx="3.2" ry="4.6" fill="#2a2140"/><ellipse cx="9" cy="-128" rx="3.2" ry="4.6" fill="#2a2140"/>
+              <circle cx="-8" cy="-130" r="1.2" fill="#fff"/><circle cx="10" cy="-130" r="1.2" fill="#fff"/></g>
+            <path class="ec" d="M-13 -127 q4 4 8 0 M5 -127 q4 4 8 0" stroke="#2a2140" fill="none" stroke-width="2.2" stroke-linecap="round"/>
+            <ellipse cx="-16" cy="-120" rx="5" ry="3" fill="#ff9db8" opacity=".6"/>
+            <ellipse cx="16" cy="-120" rx="5" ry="3" fill="#ff9db8" opacity=".6"/>
+            <path class="mouth" d="M-4 -116 q4 4 8 0" stroke="#b05a6a" fill="none" stroke-width="2" stroke-linecap="round"/>
+          </g>
+        </g>
+      </g>
+
+      <!-- ДЕВОЧКА: ниже на пол головы, каштановые волосы -->
+      <g id="girl">
+        <rect x="-9" y="-18" width="7" height="18" rx="3" fill="#ffe0cc"/>
+        <rect x="2" y="-18" width="7" height="18" rx="3" fill="#ffe0cc"/>
+        <ellipse cx="-6" cy="-1" rx="9" ry="4.5" fill="#8a5a44"/>
+        <ellipse cx="6" cy="-1" rx="9" ry="4.5" fill="#8a5a44"/>
+        <rect x="-32" y="-84" width="11" height="42" rx="5.5" fill="#fff3d9"/>
+        <rect x="21" y="-84" width="11" height="42" rx="5.5" fill="#fff3d9"/>
+        <circle cx="-26.5" cy="-40" r="5.5" fill="#ffe0cc"/>
+        <circle cx="26.5" cy="-40" r="5.5" fill="#ffe0cc"/>
+        <rect x="-22" y="-88" width="44" height="50" rx="13" fill="#fff3d9"/>
+        <path d="M-22 -44 L22 -44 L32 -14 L-32 -14Z" fill="#9a7be0"/>
+        <path d="M-22 -44 L22 -44" stroke="#b79cf0" stroke-width="3"/>
+        <ellipse cx="0" cy="-88" rx="25" ry="9" fill="#fff3d9"/>
+        <g class="head" id="gHead">
+          <path d="M-30 -114 C-36 -152 36 -152 30 -114 L33 -78 Q0 -68 -33 -78Z" fill="#6b3f2a"/>
+          <circle cx="0" cy="-114" r="26" fill="#ffe0cc"/>
+          <path d="M-27 -116 C-30 -148 30 -148 27 -116 C19 -132 7 -134 0 -129 C-8 -134 -20 -132 -27 -116Z" fill="#7d4a31"/>
+          <path d="M18 -140 l9 -5 l0 12z M18 -140 l-9 -5 l0 12z" fill="#ff7fa8"/><circle cx="18" cy="-140" r="2.6" fill="#ff5d93"/>
+          <g class="face">
+            <g class="eo"><ellipse cx="-9" cy="-112" rx="3.2" ry="4.6" fill="#2a2140"/><ellipse cx="9" cy="-112" rx="3.2" ry="4.6" fill="#2a2140"/>
+              <circle cx="-8" cy="-114" r="1.2" fill="#fff"/><circle cx="10" cy="-114" r="1.2" fill="#fff"/></g>
+            <path class="ec" d="M-13 -111 q4 4 8 0 M5 -111 q4 4 8 0" stroke="#2a2140" fill="none" stroke-width="2.2" stroke-linecap="round"/>
+            <ellipse cx="-16" cy="-104" rx="5" ry="3" fill="#ff9db8" opacity=".65"/>
+            <ellipse cx="16" cy="-104" rx="5" ry="3" fill="#ff9db8" opacity=".65"/>
+            <path class="mouth" d="M-4 -100 q4 4 8 0" stroke="#b05a6a" fill="none" stroke-width="2" stroke-linecap="round"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+
+  <div id="bokeh"></div>
+  <div id="hearts"></div>
+
+  <!-- СЦЕНА 1: ПОДАРОК -->
+  <div class="card" id="card">
+    <h1>Подарок<br>викусену</h1>
+    <button id="openBtn" type="button">Открыть</button>
+  </div>
+
+  <svg id="bigheart" viewBox="0 0 24 24" aria-hidden="true">
+    <defs><linearGradient id="gHeart" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9ac1"/><stop offset="1" stop-color="#ff4f8f"/></linearGradient></defs>
+    <path fill="url(#gHeart)" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+  </svg>
+
+  <p id="caption"></p>
+  <button id="replay" type="button">Ещё раз</button>
+  <button id="sound" type="button" aria-label="Звук вкл/выкл">♪ звук</button>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
